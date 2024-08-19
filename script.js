@@ -43,7 +43,21 @@ function openPack() {
             const card = getRandomCard();
             const cardDiv = document.createElement('div');
             cardDiv.classList.add('card', card.rarity);
-            cardDiv.innerHTML = `<p>${card.name}</p>`;
+
+            const cardInner = document.createElement('div');
+            cardInner.classList.add('card-inner');
+
+            const cardFront = document.createElement('div');
+            cardFront.classList.add('card-front');
+            cardFront.innerHTML = `<p>${card.name}</p>`;
+
+            const cardBack = document.createElement('div');
+            cardBack.classList.add('card-back');
+            cardBack.innerHTML = `<p>${card.name}</p>`;
+
+            cardInner.appendChild(cardFront);
+            cardInner.appendChild(cardBack);
+            cardDiv.appendChild(cardInner);
             collectionDiv.appendChild(cardDiv);
         }
     }, 2000); // Delay card opening to match the animation
