@@ -12,6 +12,25 @@
         .common { background-color: lightgray; }
         .rare { background-color: lightblue; }
         .ultra-rare { background-color: gold; }
+        #animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        #animation-effect {
+            width: 100px;
+            height: 100px;
+            background: url('path/to/animation.gif') no-repeat center center;
+            background-size: contain;
+        }
     </style>
 </head>
 <body>
@@ -23,10 +42,13 @@
         <h2>Your Collection</h2>
         <div id="cards"></div>
     </div>
-<div id="animation" style="display: none;">
-    <h2>Opening Pack...</h2>
-    <div id="animation-effect"></div>
-</div>
+
+    <!-- Animation Container -->
+    <div id="animation" style="display: none;">
+        <h2>Opening Pack...</h2>
+        <div id="animation-effect"></div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
