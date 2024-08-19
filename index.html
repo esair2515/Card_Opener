@@ -4,18 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Opening Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #pack { margin: 20px; }
+        #collection { margin: 20px; }
+        .card { display: inline-block; width: 100px; height: 150px; margin: 10px; border: 1px solid #000; border-radius: 8px; }
+        .common { background-color: lightgray; }
+        .rare { background-color: lightblue; }
+        .ultra-rare { background-color: gold; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Card Opening Game</h1>
-        <div id="card-pack" class="card-pack">
-            <button id="open-pack">Open Pack</button>
-        </div>
-        <div id="card-container" class="card-container">
-            <!-- Cards will be displayed here -->
-        </div>
+    <h1>Card Opening Game</h1>
+    <div id="pack">
+        <button onclick="openPack()">Open Card Pack</button>
     </div>
+    <div id="collection">
+        <h2>Your Collection</h2>
+        <div id="cards"></div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
