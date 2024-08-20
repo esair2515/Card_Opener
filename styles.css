@@ -228,3 +228,74 @@ button:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+/* Modal Window Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.modal-close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Notification System Styles */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #444;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.notification.success {
+    background-color: #4caf50;
+}
+
+.notification.error {
+    background-color: #f44336;
+}
+
+.notification.info {
+    background-color: #2196f3;
+}
+
+/* Dark Mode Styles */
+:root[data-theme='dark'] {
+    --background-color: #1e1e1e;
+    --text-color: #f0f0f0;
+    --button-color: #333;
+    --button-text-color: #f0f0f0;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+button {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+}
+
+/* Add any other elements you want to style in dark mode here */
