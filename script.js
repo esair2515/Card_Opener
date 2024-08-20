@@ -347,3 +347,57 @@ document.querySelectorAll('.accordion-toggle').forEach(toggle => {
         toggle.classList.toggle('active');
     });
 });
+document.querySelectorAll('.tooltip-trigger').forEach(trigger => {
+    trigger.addEventListener('mouseover', () => {
+        const tooltip = document.querySelector(trigger.dataset.tooltipTarget);
+        tooltip.classList.add('visible');
+    });
+    trigger.addEventListener('mouseout', () => {
+        const tooltip = document.querySelector(trigger.dataset.tooltipTarget);
+        tooltip.classList.remove('visible');
+    });
+});
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+}
+
+document.querySelector('.dark-mode-toggle').addEventListener('click', toggleDarkMode);
+
+const sliders = document.querySelectorAll('.slider');
+sliders.forEach(slider => {
+    const valueLabel = slider.nextElementSibling;
+    slider.addEventListener('input', () => {
+        valueLabel.textContent = slider.value;
+    });
+});
+
+document.querySelectorAll('.tab-button').forEach(button => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        const target = document.querySelector(button.dataset.tabTarget);
+        target.classList.add('active');
+    });
+});
+
+document.querySelectorAll('.modal-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+        const modal = document.querySelector(trigger.dataset.modalTarget);
+        modal.classList.add('active');
+    });
+});
+
+document.querySelectorAll('.close-modal').forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        modal.classList.remove('active');
+    });
+});
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal')) {
+        e.target.classList.remove('active');
+    }
+});
