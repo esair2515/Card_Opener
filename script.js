@@ -292,3 +292,58 @@ const myChart = new Chart(ctx, {
         }
     }
 });
+// Modal Windows
+document.querySelectorAll('.open-modal').forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget);
+        modal.classList.add('active');
+    });
+});
+
+document.querySelectorAll('.close-modal').forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        modal.classList.remove('active');
+    });
+});
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal')) {
+        e.target.classList.remove('active');
+    }
+});
+
+// Notification System
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerText = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.classList.add('hide');
+        notification.addEventListener('transitionend', () => {
+            notification.remove();
+        });
+    }, 3000);
+}
+
+// Toggle Switches
+document.querySelectorAll('.toggle-switch').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        const target = document.querySelector(toggle.dataset.target);
+        if (target) {
+            target.classList.toggle('active');
+        }
+    });
+});
+
+// Accordion Menus
+document.querySelectorAll('.accordion-toggle').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+        const content = toggle.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        toggle.classList.toggle('active');
+    });
+});
