@@ -356,3 +356,52 @@ input.invalid {
         opacity: 1;
     }
 }
+/* Drag and Drop */
+.draggable {
+    cursor: move;
+}
+
+.hide {
+    display: none;
+}
+
+/* Custom Context Menu */
+.custom-context-menu {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+    padding: 10px;
+}
+
+.custom-context-menu.active {
+    display: block;
+}
+
+.custom-context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.custom-context-menu ul li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.custom-context-menu ul li:hover {
+    background-color: #444;
+}
+
+/* Real-Time Search */
+.search-item {
+    margin-bottom: 10px;
+}
+
+/* Chart.js */
+#myChart {
+    max-width: 600px;
+    margin: 20px auto;
+}
