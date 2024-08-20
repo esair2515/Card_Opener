@@ -96,3 +96,64 @@ const observer = new IntersectionObserver((entries) => {
 elements.forEach(element => {
     observer.observe(element);
 });
+// Dynamic Content Loading
+window.addEventListener('scroll', () => {
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const contentHeight = document.documentElement.scrollHeight;
+    
+    if (scrollPosition >= contentHeight - 100) {
+        loadMoreContent();
+    }
+});
+
+function loadMoreContent() {
+    const container = document.querySelector('.content-container');
+    for (let i = 0; i < 5; i++) {
+        const newContent = document.createElement('div');
+        newContent.classList.add('content-item');
+        newContent.innerText = `New Content Item ${Math.random().toString(36).substring(7)}`;
+        container.appendChild(newContent);
+    }
+}
+
+// Modal Windows
+document.querySelectorAll('.open-modal').forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector('.modal');
+        modal.style.display = 'block';
+    });
+});
+
+document.querySelector('.modal-close').addEventListener('click', () => {
+    document.querySelector('.modal').style.display = 'none';
+});
+
+// Notification System
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.classList.add('notification', type);
+    notification.innerText = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Example Notification
+showNotification('Welcome to the site!', 'success');
+
+// Dark Mode Toggle
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+toggleSwitch.addEventListener('change', switchTheme);
+
+function switchTheme(e) {
+    if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+}
