@@ -157,3 +157,54 @@ function switchTheme(e) {
         document.documentElement.setAttribute('data-theme', 'light');
     }
 }
+// Advanced Animations
+document.querySelectorAll('.animate-on-click').forEach(button => {
+    button.addEventListener('click', () => {
+        const target = document.querySelector(button.dataset.target);
+        target.classList.add('animate');
+        setTimeout(() => {
+            target.classList.remove('animate');
+        }, 1000);
+    });
+});
+
+// Form Validation
+document.querySelectorAll('input[required]').forEach(input => {
+    input.addEventListener('input', () => {
+        if (input.checkValidity()) {
+            input.classList.add('valid');
+            input.classList.remove('invalid');
+        } else {
+            input.classList.add('invalid');
+            input.classList.remove('valid');
+        }
+    });
+});
+
+// Interactive Tabs
+document.querySelectorAll('.tab-links button').forEach(button => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.style.display = 'none';
+        });
+        document.querySelector(button.dataset.target).style.display = 'block';
+    });
+});
+
+// Tooltips
+document.querySelectorAll('.tooltip').forEach(element => {
+    element.addEventListener('mouseover', () => {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip-box';
+        tooltip.innerText = element.dataset.tooltip;
+        document.body.appendChild(tooltip);
+
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2}px`;
+        tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 10}px`;
+
+        element.addEventListener('mouseout', () => {
+            tooltip.remove();
+        });
+    });
+});
