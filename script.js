@@ -208,3 +208,87 @@ document.querySelectorAll('.tooltip').forEach(element => {
         });
     });
 });
+// Drag and Drop
+document.querySelectorAll('.draggable').forEach(item => {
+    item.addEventListener('dragstart', dragStart);
+    item.addEventListener('dragover', dragOver);
+    item.addEventListener('drop', drop);
+});
+
+function dragStart(e) {
+    e.dataTransfer.setData('text/plain', e.target.id);
+    setTimeout(() => {
+        e.target.classList.add('hide');
+    }, 0);
+}
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function drop(e) {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('text/plain');
+    const draggable = document.getElementById(id);
+    e.target.appendChild(draggable);
+    draggable.classList.remove('hide');
+}
+
+// Custom Context Menu
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    const contextMenu = document.querySelector('.custom-context-menu');
+    contextMenu.style.top = `${e.pageY}px`;
+    contextMenu.style.left = `${e.pageX}px`;
+    contextMenu.classList.add('active');
+});
+
+document.addEventListener('click', () => {
+    document.querySelector('.custom-context-menu').classList.remove('active');
+});
+
+// Real-Time Search
+document.getElementById('search').addEventListener('input', function() {
+    const searchQuery = this.value.toLowerCase();
+    document.querySelectorAll('.search-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(searchQuery) ? 'block' : 'none';
+    });
+});
+
+// Interactive Charts (using Chart.js)
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
