@@ -7,8 +7,28 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="card-container"></div>
-    <div class="collection-container"></div>
+    <div id="home-screen">
+        <h1>Welcome to Your Card Collection</h1>
+        <button id="start-collection">Start Your Collection</button>
+    </div>
+
+    <div id="main-content" style="display: none;">
+        <input type="text" id="search-bar" placeholder="Search for a card..." />
+        <select id="sort-options">
+            <option value="name">Sort by Name</option>
+            <option value="rarity">Sort by Rarity</option>
+        </select>
+        <div class="card-container"></div>
+        <div class="collection-container"></div>
+    </div>
+
+    <div id="card-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
