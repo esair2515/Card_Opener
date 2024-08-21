@@ -401,3 +401,74 @@ document.addEventListener('click', (e) => {
         e.target.classList.remove('active');
     }
 });
+// Form Validation
+document.querySelector('.form').addEventListener('submit', (e) => {
+    const inputs = document.querySelectorAll('.form input[required]');
+    let valid = true;
+
+    inputs.forEach(input => {
+        if (!input.value.trim()) {
+            input.classList.add('error');
+            valid = false;
+        } else {
+            input.classList.remove('error');
+        }
+    });
+
+    if (!valid) {
+        e.preventDefault();
+    }
+});
+
+// Dynamic Content Loading
+document.querySelector('.load-content').addEventListener('click', () => {
+    fetch('https://api.example.com/content')
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('.content-container').innerHTML = data.content;
+        })
+        .catch(error => console.error('Error loading content:', error));
+});
+
+// Countdown Timer
+const countdownDate = new Date().getTime() + 60000; // 1 minute from now
+const timerElement = document.querySelector('.countdown-timer');
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+
+    if (distance < 0) {
+        clearInterval(timerInterval);
+        timerElement.innerHTML = 'EXPIRED';
+        alert('Countdown has expired!');
+        return;
+    }
+
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    timerElement.innerHTML = `${minutes}m ${seconds}s`;
+}
+
+const timerInterval = setInterval(updateCountdown, 1000);
+
+// Drag and Drop File Upload
+document.querySelector('.drop-zone').addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    document.querySelector('.drop-zone').classList.add('dragging');
+});
+
+document.querySelector('.drop-zone').addEventListener('dragleave', () => {
+    document.querySelector('.drop-zone').classList.remove('dragging');
+});
+
+document.querySelector('.drop-zone').addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    document.querySelector('.drop-zone').classList.remove('dragging');
+    const files = e.dataTransfer.files;
+    // Handle file upload
+    console.log(files);
+});
