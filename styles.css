@@ -564,3 +564,38 @@ input.invalid {
     right: 10px;
     cursor: pointer;
 }
+/* Form Validation */
+.form input.error {
+    border: 1px solid red;
+}
+
+/* Dynamic Content Loading */
+.content-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Drag and Drop File Upload */
+.drop-zone {
+    width: 100%;
+    height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    transition: background-color 0.3s ease;
+}
+
+.drop-zone.dragging {
+    background-color: #eee;
+}
