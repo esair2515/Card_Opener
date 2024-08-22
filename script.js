@@ -10,13 +10,13 @@ let collection = [];
 function getRarityColor(rarity) {
     switch (rarity) {
         case 'common':
-            return 'blue';
+            return 'rgba(0, 0, 255, 0.3)';
         case 'rare':
-            return 'yellow';
+            return 'rgba(255, 255, 0, 0.3)';
         case 'mythic':
-            return 'red';
+            return 'rgba(255, 0, 0, 0.3)';
         case 'legendary':
-            return 'purple';
+            return 'rgba(128, 0, 128, 0.3)';
     }
 }
 
@@ -29,10 +29,10 @@ function createCardElement(card) {
     const front = document.createElement('div');
     front.classList.add('card-front');
     front.textContent = card.name;
+    front.style.backgroundColor = getRarityColor(card.rarity);
 
     const back = document.createElement('div');
     back.classList.add('card-back');
-    back.style.backgroundColor = getRarityColor(card.rarity);
 
     cardElement.appendChild(front);
     cardElement.appendChild(back);
@@ -109,35 +109,23 @@ function showModal(card) {
     const modalBody = modal.querySelector('.modal-body');
     modalBody.textContent = `${card.name} - ${card.rarity}`;
     modal.style.display = 'block';
+
+    document.getElementById('save-card').onclick = () => saveToCollection(card);
 }
 
 document.querySelector('.close-modal').addEventListener('click', () => {
     document.getElementById('card-modal').style.display = 'none';
 });
 
-window.addEventListener('click', (event) => {
-    const modal = document.getElementById('card-modal');
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-});
-
 document.getElementById('search-bar').addEventListener('input', (event) => {
-    const searchTerm = event.target.value.toLowerCase();
-    const filteredCards = cards.filter(card => card.name.toLowerCase().includes(searchTerm));
+    const searchText = event.target.value.toLowerCase();
+    const filteredCards = cards.filter(card => card.name.toLowerCase().includes(searchText));
     renderCards(filteredCards);
 });
 
 document.getElementById('sort-options').addEventListener('change', (event) => {
     const sortBy = event.target.value;
-    const sortedCards = [...cards].sort((a, b) => {
-        if (sortBy === 'name') {
-            return a.name.localeCompare(b.name);
-        } else {
-            const rarityOrder = ['common', 'rare', 'mythic', 'legendary'];
-            return rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity);
-        }
-    });
+    const sortedCards = [...cards].sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
     renderCards(sortedCards);
 });
 
