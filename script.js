@@ -38,8 +38,12 @@ function createCardElement(card) {
     cardElement.appendChild(back);
 
     cardElement.addEventListener('click', () => {
-        cardElement.classList.toggle('flip');
-        showModal(card);
+        cardElement.classList.add('spin');
+        setTimeout(() => {
+            cardElement.classList.remove('spin');
+            cardElement.classList.toggle('flip');
+            showModal(card);
+        }, 1500);
     });
 
     cardElement.addEventListener('dragstart', handleDragStart);
@@ -106,16 +110,19 @@ function loadCollection() {
 
 function showModal(card) {
     const modal = document.getElementById('card-modal');
-    const modalBody = modal.querySelector('.modal-body');
-    modalBody.textContent = `${card.name} - ${card.rarity}`;
+    const modalBody = document.querySelector('.modal-body');
+    modalBody.textContent = `Save ${card.name} to your collection?`;
     modal.style.display = 'block';
 
-    document.getElementById('save-card').onclick = () => saveToCollection(card);
+    document.getElementById('save-card').onclick = () => {
+        saveToCollection(card);
+        modal.style.display = 'none';
+    };
 }
 
-document.querySelector('.close-modal').addEventListener('click', () => {
+document.querySelector('.close-modal').onclick = () => {
     document.getElementById('card-modal').style.display = 'none';
-});
+};
 
 document.getElementById('search-bar').addEventListener('input', (event) => {
     const searchText = event.target.value.toLowerCase();
